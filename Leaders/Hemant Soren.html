@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Narendra Modi</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Z:\Docs\Code\Unvote\style.css">
+    
 </head>
 <body>
  
@@ -26,7 +27,7 @@
         
       </header>
     
-    <div class="prof-cont"><img src="Leaders/images/narendra-modi.jpg" alt="Narendra Modi" class="prof-img-abt">
+    <div class="prof-cont"><img src="images/narendra-modi.jpg" alt="Narendra Modi" class="prof-img-abt">
     <div class="text-cont">
     <div class="name-abt"><h2>Narendra Modi</h2></div>
     <div class="post-abt"><h2>Prime Minister, India</h2></div>
@@ -39,12 +40,18 @@
 </div>
 
 <div class="button-cont-abt">
-  <a href="#" class="btn-unv-abt anim-unv-abt green" data-sm-link-text="VOTE" id="clickme" ><span>VOTE</span></a>    
-  <a href="#" class="btn-unv-abt anim-unv-abt" data-sm-link-text="UNVOTE" class="clickme" ><span>UNVOTE</span></a>
+  <a href="#" class="btn-unv-abt anim-unv-abt green" data-sm-link-text="VOTE" id="votebtn" onclick="myFunction()"><span>VOTE</span></a>    
+  <a href="#" class="btn-unv-abt anim-unv-abt red" data-sm-link-text="UNVOTE" id="unvotebtn"><span>UNVOTE</span></a>
 
 </div>
 
-<script src="button.js"></script>
+<script src="Z:\Docs\Code\Unvote\button.js"></script>
+
+<script>
+function myFunction() {
+  document.getElementById("votebtn").style.pointerEvents = "none";
+}  
+</script>
 
 </body>
 </html>
