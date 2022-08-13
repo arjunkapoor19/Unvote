@@ -12,7 +12,7 @@ inputBox.onkeyup = (e)=>{
     let emptyArray = [];
     if(userData){
         icon.onclick = ()=>{
-            webLink = `file:///Z:/Docs/Code/Unvote/Leaders/${selectData}.html`;
+            webLink = `/Leaders/${selectData}.html`;
             linkTag.setAttribute("href", webLink);
             linkTag.click();
         }
