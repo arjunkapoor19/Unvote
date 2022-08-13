@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narendra Modi</title>
+    <link rel="stylesheet" href="Z:\Docs\Code\Unvote\style.css">
+    <link rel="icon" type="image/png" href="Z:\Docs\Code\Unvote\images\bjp.png"/>
+    
+</head>
+<body>
+ 
+    <header>
+      <a href="Z:\Docs\Code\UnvoteRevised\index.html"><div class = "logo">Unvote</div></a>
+    
+        <nav>
+        <ul class = "nav_links">
+          
+          <li><a href=#>Home</a></li>
+          <li><a href=#>Menu</a></li>
+          <li><a href=#>Sign Up</a></li>
+    
+        </ul>
+        </nav>
+    
+      <div class="search-box"><input type="text" placeholder="Minister's Name" /><span class="search-span"></span>
+        
+      </header>
+    
+    <div class="prof-cont"><img src="images/narendra-modi.jpg" alt="Narendra Modi" class="prof-img-abt">
+    <div class="text-cont">
+    <div class="name-abt"><h2>Narendra Modi</h2>
+    <img src="Z:\Docs\Code\Unvote\images\bjp.png" alt="BJP" class="logo-party"></div>
+    <div class="post-abt"><h2>Prime Minister, India</h2></div>
+    <div class="office-abt"><h2>Member of the Bharatiya Janata Party</h2></div>
+    <div class="office-abt"><h2>In Office : Since 26 May 2014 - Present </h2></div>
+    <div class="about-abt">Narendra Damodardas Modi is an Indian politician serving as the 14th and current Prime Minister of India.
+         He was the Chief Minister of Gujarat from 2001 to 2014 and is the Member of Parliament for Varanasi.
+          Modi is a member of the Bharatiya Janata Party and its National Democratic Alliance.
+    </div>
+    </div>
+</div>
+
+<div class="button-cont-abt">
+  <a href="#" class="btn-unv-abt anim-unv-abt green" data-sm-link-text="VOTE" id="voteBtn" onclick="myFunction()"><span id="vttext">VOTE</span></a>    
+  <a href="#" class="btn-unv-abt anim-unv-abt red" data-sm-link-text="UNVOTE" id="unvoteBtn"><span id="unvttext">UNVOTE</span></a>
+
+</div>
+
+<script src="Z:\Docs\Code\Unvote\script.js"></script>
+
+<script type="module">
+      
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD7XcYEyXaeFpnMhdvzYfVLrbxR9sifXIU",
+    authDomain: "tests-73088.firebaseapp.com",
+    databaseURL: "https://tests-73088-default-rtdb.firebaseio.com",
+    projectId: "tests-73088",
+    storageBucket: "tests-73088.appspot.com",
+    messagingSenderId: "118177446610",
+    appId: "1:118177446610:web:fe3a6eee3a500690720b0b"
+  };
+
+  
+  const app = initializeApp(firebaseConfig);
+  import {getDatabase, ref, child, get , update}
+  from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
+  
+  const db = getDatabase();
+
+  let span = document.getElementById("countSpan");
+  let inc = document.getElementById("voteBtn");
+  let dec = document.getElementById("unvoteBtn");
+
+  let votes;
+  let unvotes;
+
+  window.onload = function(){
+    const dbRef = ref(db);
+
+    get(child(dbRef,'/Leaders/narendramodi/VOTE')).then((snapshot)=>{
+      votes = Number(snapshot.val());
+      
+    });
+
+    get(child(dbRef,'/Leaders/narendramodi/UNVOTE')).then((snapshot)=>{
+      unvotes = Number(snapshot.val());
+      
+    });
+  }
+
+
+  function VoteCounter(){
+   
+    const dbRef = ref(db);
+    BtnsDisable();
+
+    get(child(dbRef,'/Leaders/narendramodi/VOTE')).then((snapshot)=>{
+      votes = Number(snapshot.val());
+      
+      if(this.id=='voteBtn') votes++;
+      
+
+      update(ref(db,"/Leaders/narendramodi"),{VOTE : votes});
+
+      document.getElementById("vttext").innerHTML= "Votes: " + votes;
+      document.getElementById("unvttext").innerHTML= "Unvotes: " + unvotes;
+
+      
+    });
+  }
+
+  function UnVoteCounter(){
+   
+   const dbRef = ref(db);
+   BtnsDisable();
+
+   get(child(dbRef,'/Leaders/narendramodi/UNVOTE')).then((snapshot)=>{
+     unvotes = Number(snapshot.val());
+     
+     if(this.id=='unvoteBtn') unvotes++;
+     
+
+     update(ref(db,"/Leaders/narendramodi"),{UNVOTE : unvotes});
+     document.getElementById("vttext").innerHTML= "Votes: " + votes;
+     document.getElementById("unvttext").innerHTML= "Unvotes: " + unvotes;
+
+     
+   });
+ }
+  function BtnsDisable(){
+    inc.style.pointerEvents = "none";
+    dec.style.pointerEvents = "none";
+  }
+
+  inc.addEventListener('click',VoteCounter)
+  dec.addEventListener('click',UnVoteCounter)
+
+</script>
+
+</body>
+</html>
