@@ -44,7 +44,7 @@ header{
 }
 .wrapper-search {
     max-width: 450px;
-    margin: 0px auto;
+    margin: 0px 30px;
   }
   
   .wrapper-search .search-input {
